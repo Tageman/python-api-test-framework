@@ -1,0 +1,26 @@
+# 全局配置
+base_url: "http://api.example.com"
+timeout: 30
+retry_times: 3
+retry_interval: 1
+
+# 环境配置
+env: "dev"  # 默认环境，可选：dev, test, prod
+
+# 日志配置
+log:
+  level: "INFO"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {message}"
+  file: "logs/test.log"
+
+# 报告配置
+report:
+  title: "接口测试报告"
+  description: "自动化测试报告"
+  theme: "standard"
+
+# 全局文件上传配置
+upload:
+  max_file_size: 5242880  # 5MB
+  allowed_extensions: ["jpg", "jpeg", "png", "pdf", "txt"]
+  upload_dir: "uploads" 

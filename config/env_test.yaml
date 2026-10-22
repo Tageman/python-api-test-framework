@@ -1,0 +1,22 @@
+# 测试环境配置
+base_url: "http://test-api.example.com"
+db:
+  host: "test-db.example.com"
+  port: 3306
+  user: "${DB_USER}"
+  password: "${DB_PASSWORD}"
+  database: "${DB_NAME}"
+
+# 测试数据配置
+test_data:
+  user:
+    username: "${TEST_USERNAME}"
+    password: "${TEST_PASSWORD}"
+  order:
+    order_id: "TEST_ORDER_001"
+
+# 文件上传配置
+upload:
+  max_file_size: 10485760  # 10MB
+  allowed_extensions: ["jpg", "jpeg", "png", "pdf", "txt", "doc", "docx", "xls", "xlsx"]
+  upload_dir: "uploads/test" 

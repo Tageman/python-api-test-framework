@@ -1,0 +1,55 @@
+test_cases:
+  - name: "测试单文件上传"
+    description: "验证单文件上传接口"
+    request:
+      method: "POST"
+      url: "/api/v1/file/upload"
+      headers:
+        Authorization: "Bearer ${token}"
+      file:
+        path: "data/files/test_file.txt"
+        field_name: "file"
+      data:
+        description: "测试文件"
+        file_type: "text"
+    validate:
+      - type: "status_code"
+        value: 200
+      - type: "json_contains"
+        value:
+          code: 0
+          message: "success"
+      - type: "json_schema"
+        value:
+          data.file_id: str
+          data.file_name: str
+          data.file_size: int
+          data.file_url: str
+
+  - name: "测试多文件上传"
+    description: "验证多文件上传接口"
+    request:
+      method: "POST"
+      url: "/api/v1/file/batch-upload"
+      headers:
+        Authorization: "Bearer ${token}"
+      files:
+        - path: "data/files/image1.jpg"
+          field_name: "files"
+        - path: "data/files/image2.jpg"
+          field_name: "files"
+      data:
+        batch_id: "BATCH_001"
+        description: "测试批量图片"
+    validate:
+      - type: "status_code"
+        value: 200
+      - type: "json_contains"
+        value:
+          code: 0
+          message: "success"
+      - type: "json_schema"
+        value:
+          data.batch_id: str
+          data.success_count: int
+          data.files: list 

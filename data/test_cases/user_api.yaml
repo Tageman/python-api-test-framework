@@ -1,0 +1,44 @@
+test_cases:
+  - name: "测试用户登录"
+    description: "验证用户登录接口"
+    request:
+      method: "POST"
+      url: "/api/v1/user/login"
+      headers:
+        Content-Type: "application/json"
+      data:
+        username: "${test_data.user.username}"
+        password: "${test_data.user.password}"
+    validate:
+      - type: "status_code"
+        value: 200
+      - type: "json_contains"
+        value:
+          code: 0
+          message: "success"
+      - type: "json_schema"
+        value:
+          data.token: str
+          data.user_id: int
+          data.username: str
+
+  - name: "测试获取用户信息"
+    description: "验证获取用户信息接口"
+    request:
+      method: "GET"
+      url: "/api/v1/user/info"
+      headers:
+        Authorization: "Bearer ${token}"
+    validate:
+      - type: "status_code"
+        value: 200
+      - type: "json_contains"
+        value:
+          code: 0
+          message: "success"
+      - type: "json_schema"
+        value:
+          data.user_id: int
+          data.username: str
+          data.email: str
+          data.phone: str 

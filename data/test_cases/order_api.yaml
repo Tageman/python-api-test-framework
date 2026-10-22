@@ -1,0 +1,53 @@
+test_cases:
+  - name: "测试创建订单"
+    description: "验证创建订单接口"
+    request:
+      method: "POST"
+      url: "/api/v1/order/create"
+      headers:
+        Content-Type: "application/json"
+        Authorization: "Bearer ${token}"
+      data:
+        order_id: "${test_data.order.order_id}"
+        product_id: "PROD_001"
+        quantity: 2
+        address: "TEST_ADDRESS_001"
+    validate:
+      - type: "status_code"
+        value: 200
+      - type: "json_contains"
+        value:
+          code: 0
+          message: "success"
+      - type: "json_schema"
+        value:
+          data.order_id: str
+          data.status: str
+          data.create_time: str
+          data.total_amount: float
+
+  - name: "测试获取订单列表"
+    description: "验证获取订单列表接口"
+    request:
+      method: "GET"
+      url: "/api/v1/order/list"
+      headers:
+        Authorization: "Bearer ${token}"
+      params:
+        page: 1
+        page_size: 10
+    validate:
+      - type: "status_code"
+        value: 200
+      - type: "json_contains"
+        value:
+          code: 0
+          message: "success"
+      - type: "json_schema"
+        value:
+          data.total: int
+          data.page: int
+          data.page_size: int
+          data.items: list
+      - type: "list_length"
+        value: 10 

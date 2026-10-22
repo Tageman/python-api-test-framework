@@ -1,0 +1,22 @@
+# 开发环境配置
+base_url: "http://dev-api.example.com"
+db:
+  host: "localhost"
+  port: 3306
+  user: "${DB_USER}"
+  password: "${DB_PASSWORD}"
+  database: "${DB_NAME}"
+
+# 测试数据配置
+test_data:
+  user:
+    username: "${TEST_USERNAME}"
+    password: "${TEST_PASSWORD}"
+  order:
+    order_id: "TEST_ORDER_001"
+
+# 文件上传配置
+upload:
+  max_file_size: 20971520  # 20MB，开发环境允许更大的文件
+  allowed_extensions: ["jpg", "jpeg", "png", "pdf", "txt", "doc", "docx", "xls", "xlsx", "zip", "rar"]
+  upload_dir: "uploads/dev" 
